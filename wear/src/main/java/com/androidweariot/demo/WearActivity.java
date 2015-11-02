@@ -45,8 +45,8 @@ public class WearActivity extends Activity implements SensorEventListener, DataA
     private GoogleApiClient mGoogleApiClient;
 
     private TextView rate;
-    private TextView accuracy;
-    private TextView sensorInformation;
+    //private TextView accuracy;
+    //private TextView sensorInformation;
     private Sensor mHeartRateSensor;
     private SensorManager mSensorManager;
 
@@ -56,11 +56,11 @@ public class WearActivity extends Activity implements SensorEventListener, DataA
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        /*mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Wearable.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
-                .build();
+                .build();*/
 
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
@@ -78,14 +78,9 @@ public class WearActivity extends Activity implements SensorEventListener, DataA
                 }
 
 
-
-
-
                 rate = (TextView) stub.findViewById(R.id.rate);
-                rate.setText("Reading...");
+                rate.setText("");
 
-                accuracy = (TextView) stub.findViewById(R.id.accuracy);
-                sensorInformation = (TextView) stub.findViewById(R.id.sensor);
                 mSensorManager = ((SensorManager)getSystemService(SENSOR_SERVICE));
                 mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
 
@@ -106,6 +101,7 @@ public class WearActivity extends Activity implements SensorEventListener, DataA
                         //  There's nothing in our bundle.
                         //sendMessage(MSG_FROM_WEAR, "a msg from wear to mobile: " + new Date().toString());
                     }
+
                     @Override
                     public void onConnectionSuspended(int cause) {
                         Log.d(TAG, "onConnectionSuspended: " + cause);
@@ -210,7 +206,7 @@ public class WearActivity extends Activity implements SensorEventListener, DataA
         if (mSensorManager!=null)
             mSensorManager.unregisterListener(this);
 
-        if(mGoogleApiClient != null) mGoogleApiClient.disconnect();
+        if (mGoogleApiClient != null) mGoogleApiClient.disconnect();
     }
 
     @Override
@@ -227,15 +223,15 @@ public class WearActivity extends Activity implements SensorEventListener, DataA
         if (event.sensor.getType() == Sensor.TYPE_HEART_RATE) {
             if(event.values[0] <= 0) { // HR sensor is being initialized
                 sendMessage(MSG_FROM_WEAR, String.valueOf(Float.valueOf(event.values[0]).intValue()) + new Date().toString());
-                sensorInformation.setText(String.valueOf(Float.valueOf(event.values[0]).intValue()));
+                //sensorInformation.setText(String.valueOf(Float.valueOf(event.values[0]).intValue()));
             } else {
-                sensorInformation.setText("Iniciando...");
+                //sensorInformation.setText("Iniciando...");
             }
 
             Log.d(TAG, "sensor event: " + event.accuracy + " = " + event.values[0]);
-                
+
             rate.setText(String.valueOf(event.values[0]));
-            accuracy.setText("Accuracy: " + event.accuracy);
+            //accuracy.setText("Accuracy: " + event.accuracy);
             //updateData(event.sensor.toString() + System.currentTimeMillis());
             //sensorInformation.setText(event.sensor.toString());
         }
@@ -245,7 +241,7 @@ public class WearActivity extends Activity implements SensorEventListener, DataA
     public void onAccuracyChanged(Sensor sensor, int i) {
 
         Log.d(TAG, "accuracy changed: " + i);
-        accuracy.setText("Accuracy: " + Integer.toString(i));
+        //accuracy.setText("Accuracy: " + Integer.toString(i));
     }
 
     @Override

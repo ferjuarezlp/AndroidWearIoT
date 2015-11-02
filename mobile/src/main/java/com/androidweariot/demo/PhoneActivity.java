@@ -73,6 +73,7 @@ public class PhoneActivity extends AppCompatActivity {
                             @Override
                             public void onConnected(Bundle connectionHint) {
                                 textViewWearState.setText(getString(R.string.label_connected));
+                                tellWatchConnectedState("sending message");
                             }
                             @Override
                             public void onConnectionSuspended(int cause) {
