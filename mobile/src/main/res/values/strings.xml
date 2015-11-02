@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Android Wear IoT</string>
+    <string name="label_connect">Conectar con Wear</string>
+    <string name="label_disconnect">Desconectar</string>
+    <string name="label_firebase_state">Estado Firebase: </string>
+    <string name="label_wear_state">Estado Wear: </string>
+    <string name="label_connected">Conectado</string>
+    <string name="label_heart_rate">Pulso Cardiaco: </string>
+    <string name="label_acc">Accelerometro: </string>
+    <string name="label_x">X: </string>
+    <string name="label_y">Y: </string>
+    <string name="label_z">Z: </string>
+    <string name="label_not_connected">Desconectado</string>
+    <string name="label_error">Error</string>
+    <string name="action_settings">Settings</string>
+</resources>
